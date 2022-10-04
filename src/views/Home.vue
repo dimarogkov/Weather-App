@@ -1,32 +1,32 @@
 <template>
-    <wa-header @getCity="getWeather" :isLoading="isLoading" />
-
-    <wa-banner :errors="errors" :data="data" />
+    <section class="section banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="banner__info">
+                        <div class="h2 title">{{ bannerTitle }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </template>
 
 <script>
-import {mapState} from 'vuex';
-import {actionsTypes} from '@/store/modules/weather';
-import WaHeader from '@/components/Header';
-import WaBanner from '@/components/Banner';
-
 export default {
     name: 'wa-home',
-    components: {
-        WaHeader,
-        WaBanner,
-    },
-    computed: {
-        ...mapState({
-            data: (state) => state.weather.data,
-            isLoading: (state) => state.weather.isLoading,
-            errors: (state) => state.weather.errors,
-        }),
+    data() {
+        return {
+            bannerTitle: 'Enter the city',
+        };
     },
     methods: {
-        getWeather(city) {
-            this.$store.dispatch(actionsTypes.getWeather, city);
+        defaultTheme() {
+            document.body.className = '';
         },
+    },
+    mounted() {
+        this.defaultTheme();
     },
 };
 </script>

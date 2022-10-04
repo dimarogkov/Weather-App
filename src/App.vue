@@ -1,10 +1,17 @@
 <template>
+    <wa-header />
+
     <router-view />
 </template>
 
 <script>
+import WaHeader from '@/components/Header';
+
 export default {
     name: 'wa-app',
+    components: {
+        WaHeader,
+    },
 };
 </script>
 
@@ -15,7 +22,8 @@ export default {
     --color-white: #fff;
     --color-black: #282828;
     --color-grey: #ecf0f1;
-    --color-theme: #667eea;
+    --color-theme: #282828;
+    --color-theme-grad: linear-gradient(135deg, var(--color-black) 50%, #2c3e50 100%);
     --header-height: 70px;
 }
 * {
@@ -39,7 +47,7 @@ html *::-webkit-scrollbar-track {
 }
 html::-webkit-scrollbar-thumb,
 html *::-webkit-scrollbar-thumb {
-    background: var(--color-black);
+    background: var(--color-theme);
 }
 :focus,
 :active,
@@ -52,6 +60,41 @@ body {
     color: var(--color-black);
     margin: 0;
     padding: 0;
+}
+body.clear {
+    --color-theme: #6e45e2;
+    --color-theme-grad: linear-gradient(to top, #88d3ce 0%, #6e45e2 100%);
+}
+body.clouds {
+    --color-theme: #505285;
+    --color-theme-grad: linear-gradient(
+        to top,
+        #505285 0%,
+        #585e92 12%,
+        #65689f 25%,
+        #7474b0 37%,
+        #7e7ebb 50%,
+        #8389c7 62%,
+        #9795d4 75%,
+        #a2a1dc 87%,
+        #b5aee4 100%
+    );
+}
+body.snow {
+    --color-theme: #13547a;
+    --color-theme-grad: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+}
+body.rain {
+    --color-theme: #764ba2;
+    --color-theme-grad: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+body.drizzle {
+    --color-theme: #596164;
+    --color-theme-grad: linear-gradient(to right, #868f96 0%, #596164 100%);
+}
+body.thunderstorm {
+    --color-theme: #09203f;
+    --color-theme-grad: linear-gradient(to top, #09203f 0%, #537895 100%);
 }
 .section {
     position: relative;
@@ -85,27 +128,31 @@ h3,
     font-size: 28px;
     line-height: 1em;
 }
-.link {
+h4,
+.h4 {
     position: relative;
-    display: inline-block;
+    font-size: 26px;
+    line-height: 1em;
+}
+.text {
+    position: relative;
     font-size: 17px;
-    font-weight: 500;
     color: var(--color-black);
 }
-.link::before {
-    position: absolute;
-    content: '';
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--color-black);
-    transition: all 0.3s;
+.text.size-2 {
+    font-size: 19px;
 }
-.link:hover::before {
-    left: auto;
-    right: 0;
-    width: 0;
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
+.bold {
+    font-weight: 700;
+}
+.media {
+    font-weight: 500;
 }
 .btn {
     position: relative;
@@ -130,19 +177,6 @@ h3,
 .btn[disabled] {
     opacity: 0.7;
     pointer-events: none;
-}
-.form {
-    position: relative;
-    width: 100%;
-}
-.form input {
-    position: relative;
-    width: 100%;
-    height: 50px;
-    font-size: 16px;
-    color: var(--color-black);
-    padding: 0 20px;
-    border: 2px solid var(--color-black);
 }
 @media (min-width: 1441px) and (max-width: 1640px) {
     .container {
@@ -212,9 +246,52 @@ h3,
         margin-left: 8.333333%;
     }
 }
+@media (max-width: 1199px) {
+    h1,
+    .h1 {
+        font-size: 36px;
+    }
+    h2,
+    .h2 {
+        font-size: 32px;
+    }
+    h3,
+    .h3 {
+        font-size: 26px;
+    }
+    h4,
+    .h4 {
+        font-size: 24px;
+    }
+    .text.size-2 {
+        font-size: 17px;
+    }
+}
 @media (max-width: 767px) {
     :root {
         --header-height: 60px;
+    }
+}
+@media (max-width: 575px) {
+    h1,
+    .h1 {
+        font-size: 32px;
+    }
+    h2,
+    .h2 {
+        font-size: 28px;
+    }
+    h3,
+    .h3 {
+        font-size: 24px;
+    }
+    h4,
+    .h4 {
+        font-size: 22px;
+    }
+    .text,
+    .text.size-2 {
+        font-size: 16px;
     }
 }
 </style>

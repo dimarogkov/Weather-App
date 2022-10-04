@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
+
 export default {
     name: 'wa-header',
     data() {
@@ -31,16 +33,14 @@ export default {
             city: '',
         };
     },
-    emits: ['getCity'],
-    props: {
-        isLoading: {
-            type: Boolean,
-            required: false,
-        },
+    computed: {
+        ...mapState({
+            isLoading: (state) => state.weather.isLoading,
+        }),
     },
     methods: {
         onSubmit() {
-            this.$emit('getCity', this.city.toLowerCase());
+            this.$router.push({name: 'weather', params: {slug: this.city.toLowerCase()}});
             this.city = '';
         },
     },
@@ -56,7 +56,7 @@ export default {
     width: 100%;
     height: var(--header-height);
     background-color: var(--color-white);
-    box-shadow: 0 5px 10px var(--color-grey);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 }
 .header__margin {
     height: var(--header-height);
