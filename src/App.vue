@@ -1,60 +1,10 @@
 <template>
-    <div>
-        <wa-header />
-
-        <wa-banner />
-    </div>
-
-    <div v-if="errors">This city is not find in the database, try again</div>
-
-    <form @submit.prevent="getWeather">
-        <input type="text" placeholder="Write the text" v-model="city" required />
-        <button type="submit" class="btn" :disabled="isLoading">
-            <i class="las la-search"></i>
-        </button>
-    </form>
-
-    <div v-if="data">
-        <div>{{ data.name }} / {{ data.sys.country }}</div>
-        <div>{{ moment(new Date()).format('dddd MMMM YY') }}</div>
-        <div>{{ Math.round(data.main.temp) }}</div>
-        <div>Min - {{ Math.round(data.main.temp_min) }} / Max - {{ Math.round(data.main.temp_max) }}</div>
-        <div>{{ data.weather[0].main }} / {{ data.weather[0].description }}</div>
-    </div>
+    <router-view />
 </template>
 
 <script>
-import moment from 'moment';
-import {mapState} from 'vuex';
-import {actionsTypes} from '@/store/modules/weather';
-import WaHeader from '@/components/Header';
-import WaBanner from '@/components/Banner';
-
 export default {
     name: 'wa-app',
-    data() {
-        return {
-            moment,
-            city: '',
-        };
-    },
-    components: {
-        WaHeader,
-        WaBanner,
-    },
-    computed: {
-        ...mapState({
-            data: (state) => state.weather.data,
-            isLoading: (state) => state.weather.isLoading,
-            errors: (state) => state.weather.errors,
-        }),
-    },
-    methods: {
-        getWeather() {
-            this.$store.dispatch(actionsTypes.getWeather, this.city.toLowerCase());
-            this.city = '';
-        },
-    },
 };
 </script>
 
@@ -65,6 +15,7 @@ export default {
     --color-white: #fff;
     --color-black: #282828;
     --color-grey: #ecf0f1;
+    --color-theme: #667eea;
     --header-height: 70px;
 }
 * {
@@ -192,6 +143,74 @@ h3,
     color: var(--color-black);
     padding: 0 20px;
     border: 2px solid var(--color-black);
+}
+@media (min-width: 1441px) and (max-width: 1640px) {
+    .container {
+        max-width: 1340px;
+    }
+}
+@media (min-width: 1200px) and (max-width: 1440px) {
+    .container {
+        max-width: 1240px;
+    }
+}
+@media (min-width: 1200px) and (max-width: 1730px) {
+    .col-lt-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .col-lt-11 {
+        flex: 0 0 91.666667%;
+        max-width: 91.666667%;
+    }
+    .col-lt-10 {
+        flex: 0 0 83.333333%;
+        max-width: 83.333333%;
+    }
+    .col-lt-9 {
+        flex: 0 0 75%;
+        max-width: 75%;
+    }
+    .col-lt-8 {
+        flex: 0 0 66.666667%;
+        max-width: 66.666667%;
+    }
+    .col-lt-7 {
+        flex: 0 0 58.333333%;
+        max-width: 58.333333%;
+    }
+    .col-lt-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .col-lt-5 {
+        max-width: 41.666667%;
+        flex: 0 0 41.666667%;
+    }
+    .col-lt-4 {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+    .col-lt-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+    .col-lt-2 {
+        flex: 0 0 16.666667%;
+        max-width: 16.666667%;
+    }
+    .offset-lt-0 {
+        margin-left: 0;
+    }
+    .offset-lt-3 {
+        margin-left: 25%;
+    }
+    .offset-lt-2 {
+        margin-left: 16.666667%;
+    }
+    .offset-lt-1 {
+        margin-left: 8.333333%;
+    }
 }
 @media (max-width: 767px) {
     :root {
