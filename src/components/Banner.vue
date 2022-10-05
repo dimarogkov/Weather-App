@@ -132,6 +132,10 @@ export default {
         height: 270px;
         padding: 25px;
     }
+    .banner__img {
+        width: 90px;
+        height: 90px;
+    }
     .banner__block .title {
         font-size: 64px;
     }
@@ -144,6 +148,12 @@ export default {
     .banner__block {
         height: 250px;
         padding: 20px;
+    }
+    .banner__img {
+        top: 15px;
+        right: 15px;
+        width: 80px;
+        height: 80px;
     }
     .banner__block .title {
         font-size: 56px;

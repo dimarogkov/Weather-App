@@ -4,6 +4,8 @@
     <wa-errors v-if="errors" :errors="errors" />
 
     <wa-banner v-if="data" :data="data" />
+
+    <wa-info v-if="data" :data="data" />
 </template>
 
 <script>
@@ -12,6 +14,7 @@ import {actionsTypes} from '@/store/modules/weather';
 import WaBanner from '@/components/Banner';
 import WaLoader from '@/components/Loader';
 import WaErrors from '@/components/Errors';
+import WaInfo from '@/components/Info';
 
 export default {
     name: 'wa-weather',
@@ -19,6 +22,7 @@ export default {
         WaLoader,
         WaErrors,
         WaBanner,
+        WaInfo,
     },
     computed: {
         ...mapState({

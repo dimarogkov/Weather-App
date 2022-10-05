@@ -88,19 +88,8 @@ body {
     --color-theme-grad: linear-gradient(to top, #88d3ce 0%, #6e45e2 100%);
 }
 .page.clouds {
-    --color-theme: #505285;
-    --color-theme-grad: linear-gradient(
-        to top,
-        #505285 0%,
-        #585e92 12%,
-        #65689f 25%,
-        #7474b0 37%,
-        #7e7ebb 50%,
-        #8389c7 62%,
-        #9795d4 75%,
-        #a2a1dc 87%,
-        #b5aee4 100%
-    );
+    --color-theme: #ff057c;
+    --color-theme-grad: linear-gradient(-225deg, #ff057c 0%, #7c64d5 48%, #4cc3ff 100%);
 }
 .page.snow {
     --color-theme: #13547a;
@@ -117,6 +106,27 @@ body {
 .page.thunderstorm {
     --color-theme: #09203f;
     --color-theme-grad: linear-gradient(to top, #09203f 0%, #537895 100%);
+}
+.page.mist,
+.page.fog {
+    --color-theme: #29323c;
+    --color-theme-grad: linear-gradient(60deg, #29323c 0%, #485563 100%);
+}
+.page.smoke,
+.page.haze,
+.page.dust {
+    --color-theme: #616161;
+    --color-theme-grad: linear-gradient(-20deg, #616161 0%, #9bc5c3 100%);
+}
+.page.sand,
+.page.ash {
+    --color-theme: #c1c161;
+    --color-theme-grad: linear-gradient(to right, #c1c161 0%, #c1c161 0%, #d4d4b1 100%);
+}
+.page.squall,
+.page.tornado {
+    --color-theme: #3584a7;
+    --color-theme-grad: linear-gradient(-225deg, #473b7b 0%, #3584a7 51%, #30d2be 100%);
 }
 .section {
     position: relative;
