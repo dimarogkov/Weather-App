@@ -1,15 +1,23 @@
 <template>
+    <wa-loader v-if="isLoading" />
+
+    <wa-errors v-if="errors" :errors="errors" />
+
     <wa-banner v-if="data" :data="data" />
 </template>
 
 <script>
 import {mapState} from 'vuex';
-import WaBanner from '@/components/Banner';
 import {actionsTypes} from '@/store/modules/weather';
+import WaBanner from '@/components/Banner';
+import WaLoader from '@/components/Loader';
+import WaErrors from '@/components/Errors';
 
 export default {
     name: 'wa-weather',
     components: {
+        WaLoader,
+        WaErrors,
         WaBanner,
     },
     computed: {
