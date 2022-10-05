@@ -20,13 +20,5 @@ export default {
             bannerTitle: 'Enter the city',
         };
     },
-    methods: {
-        defaultTheme() {
-            document.body.className = '';
-        },
-    },
-    mounted() {
-        this.defaultTheme();
-    },
 };
 </script>

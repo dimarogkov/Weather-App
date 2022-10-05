@@ -2,6 +2,7 @@ import weatherApi from '@/api/weather';
 
 const store = {
     data: null,
+    colorTheme: null,
     isLoading: false,
     errors: null,
 };
@@ -20,11 +21,13 @@ const mutations = {
     [mutationsTypes.getWeatherStart](state) {
         state.isLoading = true;
         state.data = null;
+        state.colorTheme = null;
         state.errors = null;
     },
     [mutationsTypes.getWeatherSuccess](state, data) {
         state.isLoading = false;
         state.data = data;
+        state.colorTheme = data.weather[0].main.toLowerCase();
     },
     [mutationsTypes.getWeatherFailed](state, data) {
         state.isLoading = false;

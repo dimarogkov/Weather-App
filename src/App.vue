@@ -1,16 +1,34 @@
 <template>
-    <wa-header />
+    <div class="page" :class="setColorTheme">
+        <wa-header />
 
-    <router-view />
+        <router-view />
+    </div>
 </template>
 
 <script>
+import {mapState} from 'vuex';
 import WaHeader from '@/components/Header';
 
 export default {
     name: 'wa-app',
     components: {
         WaHeader,
+    },
+    computed: {
+        ...mapState({
+            colorTheme: (state) => state.weather.colorTheme,
+        }),
+        pageName() {
+            return this.$route.name;
+        },
+        setColorTheme() {
+            if (this.pageName !== 'home') {
+                return this.colorTheme;
+            }
+
+            return '';
+        },
     },
 };
 </script>
@@ -61,11 +79,15 @@ body {
     margin: 0;
     padding: 0;
 }
-body.clear {
+.page {
+    position: relative;
+    width: 100%;
+}
+.page.clear {
     --color-theme: #6e45e2;
     --color-theme-grad: linear-gradient(to top, #88d3ce 0%, #6e45e2 100%);
 }
-body.clouds {
+.page.clouds {
     --color-theme: #505285;
     --color-theme-grad: linear-gradient(
         to top,
@@ -80,19 +102,19 @@ body.clouds {
         #b5aee4 100%
     );
 }
-body.snow {
+.page.snow {
     --color-theme: #13547a;
     --color-theme-grad: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
 }
-body.rain {
+.page.rain {
     --color-theme: #764ba2;
     --color-theme-grad: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
-body.drizzle {
+.page.drizzle {
     --color-theme: #596164;
     --color-theme-grad: linear-gradient(to right, #868f96 0%, #596164 100%);
 }
-body.thunderstorm {
+.page.thunderstorm {
     --color-theme: #09203f;
     --color-theme-grad: linear-gradient(to top, #09203f 0%, #537895 100%);
 }

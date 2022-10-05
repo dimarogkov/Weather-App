@@ -1,5 +1,5 @@
 <template>
-    <wa-banner v-if="data" :data="data" :colorTheme="colorTheme" />
+    <wa-banner v-if="data" :data="data" />
 </template>
 
 <script>
@@ -20,33 +20,6 @@ export default {
         }),
         slugCity() {
             return this.$route.params.slug;
-        },
-        colorTheme() {
-            if (this.data.weather[0].main === 'Clear') {
-                return (document.body.className = 'clear');
-            }
-
-            if (this.data.weather[0].main === 'Clouds') {
-                return (document.body.className = 'clouds');
-            }
-
-            if (this.data.weather[0].main === 'Snow') {
-                return (document.body.className = 'snow');
-            }
-
-            if (this.data.weather[0].main === 'Rain') {
-                return (document.body.className = 'rain');
-            }
-
-            if (this.data.weather[0].main === 'Drizzle') {
-                return (document.body.className = 'drizzle');
-            }
-
-            if (this.data.weather[0].main === 'Thunderstorm') {
-                return (document.body.className = 'thunderstorm');
-            }
-
-            return (document.body.className = '');
         },
     },
     methods: {
