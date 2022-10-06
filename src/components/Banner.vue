@@ -30,11 +30,6 @@ import moment from 'moment';
 
 export default {
     name: 'wa-banner',
-    data() {
-        return {
-            moment,
-        };
-    },
     props: {
         data: {
             type: Object,
@@ -44,6 +39,9 @@ export default {
     computed: {
         weatherIcon() {
             return `http://openweathermap.org/img/wn/${this.data.weather[0].icon}@2x.png`;
+        },
+        moment() {
+            return moment;
         },
     },
 };
