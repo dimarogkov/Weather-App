@@ -24,25 +24,29 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import {useStore} from 'vuex';
+import {useRouter} from 'vue-router/dist/vue-router';
+import {ref, computed} from 'vue';
 
 export default {
     name: 'wa-header',
-    data() {
-        return {
-            city: '',
+    emits: ['update:modelValue'],
+    setup() {
+        const store = useStore();
+        const router = useRouter();
+
+        const city = ref('');
+        const isLoading = computed(() => store.state.weather.isLoading);
+        const onSubmit = () => {
+            router.push({name: 'weather', params: {slug: city.value.toLowerCase()}});
+            city.value = '';
         };
-    },
-    computed: {
-        ...mapState({
-            isLoading: (state) => state.weather.isLoading,
-        }),
-    },
-    methods: {
-        onSubmit() {
-            this.$router.push({name: 'weather', params: {slug: this.city.toLowerCase()}});
-            this.city = '';
-        },
+
+        return {
+            city,
+            isLoading,
+            onSubmit,
+        };
     },
 };
 </script>

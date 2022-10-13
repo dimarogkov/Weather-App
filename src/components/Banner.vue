@@ -15,8 +15,8 @@
                             <div class="h4">{{ data.name }} , {{ data.sys.country }}</div>
                         </div>
                         <div class="text size-2 text-right">
-                            <div>{{ moment(new Date()).format('LT') }}</div>
-                            <div>{{ moment(new Date()).format('dddd MMMM YY') }}</div>
+                            <div>{{ date(new Date()).format('LT') }}</div>
+                            <div>{{ date(new Date()).format('dddd MMMM YY') }}</div>
                         </div>
                     </div>
                 </div>
@@ -27,6 +27,7 @@
 
 <script>
 import moment from 'moment';
+import {computed} from 'vue';
 
 export default {
     name: 'wa-banner',
@@ -36,13 +37,14 @@ export default {
             required: false,
         },
     },
-    computed: {
-        weatherIcon() {
-            return `http://openweathermap.org/img/wn/${this.data.weather[0].icon}@2x.png`;
-        },
-        moment() {
-            return moment;
-        },
+    setup(props) {
+        const weatherIcon = computed(() => `http://openweathermap.org/img/wn/${props.data.weather[0].icon}@2x.png`);
+        const date = computed(() => moment);
+
+        return {
+            weatherIcon,
+            date,
+        };
     },
 };
 </script>

@@ -7,7 +7,9 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import {computed} from 'vue';
+import {useRoute} from 'vue-router/dist/vue-router';
+import {useStore} from 'vuex';
 import WaHeader from '@/components/Header';
 
 export default {
@@ -15,20 +17,25 @@ export default {
     components: {
         WaHeader,
     },
-    computed: {
-        ...mapState({
-            colorTheme: (state) => state.weather.colorTheme,
-        }),
-        pageName() {
-            return this.$route.name;
-        },
-        setColorTheme() {
-            if (this.pageName !== 'home') {
-                return this.colorTheme;
+    setup() {
+        const route = useRoute();
+        const store = useStore();
+
+        const colorTheme = computed(() => store.state.weather.colorTheme);
+        const pageName = computed(() => route.name);
+        const setColorTheme = computed(() => {
+            if (pageName.value !== 'home') {
+                return colorTheme.value;
             }
 
             return '';
-        },
+        });
+
+        return {
+            colorTheme,
+            pageName,
+            setColorTheme,
+        };
     },
 };
 </script>

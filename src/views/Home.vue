@@ -15,9 +15,11 @@
 <script>
 export default {
     name: 'wa-home',
-    data() {
+    setup() {
+        const bannerTitle = 'Enter the city';
+
         return {
-            bannerTitle: 'Enter the city',
+            bannerTitle,
         };
     },
 };

@@ -9,7 +9,9 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import {useStore} from 'vuex';
+import {computed, watch, onMounted} from 'vue';
+import {useRoute} from 'vue-router/dist/vue-router';
 import {actionsTypes} from '@/store/modules/weather';
 import WaBanner from '@/components/Banner';
 import WaLoader from '@/components/Loader';
@@ -24,28 +26,27 @@ export default {
         WaBanner,
         WaInfo,
     },
-    computed: {
-        ...mapState({
-            data: (state) => state.weather.data,
-            errors: (state) => state.weather.errors,
-            isLoading: (state) => state.weather.isLoading,
-        }),
-        slugCity() {
-            return this.$route.params.slug;
-        },
-    },
-    methods: {
-        currentWeather() {
-            this.$store.dispatch(actionsTypes.getWeather, this.slugCity);
-        },
-    },
-    watch: {
-        slugCity() {
-            this.currentWeather();
-        },
-    },
-    mounted() {
-        this.currentWeather();
+    setup() {
+        const store = useStore();
+        const route = useRoute();
+
+        const data = computed(() => store.state.weather.data);
+        const errors = computed(() => store.state.weather.errors);
+        const isLoading = computed(() => store.state.weather.isLoading);
+        const slugCity = computed(() => route.params.slug);
+
+        const currentWeather = () => store.dispatch(actionsTypes.getWeather, slugCity.value);
+
+        watch(slugCity, currentWeather);
+        onMounted(currentWeather);
+
+        return {
+            data,
+            errors,
+            isLoading,
+            slugCity,
+            currentWeather,
+        };
     },
 };
 </script>
